@@ -50,14 +50,21 @@ public class TaskServiceBean implements TaskService {
 
 	@Override
 	public Task updateTask(Task task) {
-		// TODO Auto-generated method stub
-		return null;
+		Task taskFound = findById(task.getId());
+		if(taskFound==null){
+			throw new EntityNotFoundException("Task not found with the Id provided.");
+		}			
+		Task taskUpdated = taskDao.save(task);
+		return taskUpdated;
 	}
 
 	@Override
 	public void deleteTask(Task task) {
-		// TODO Auto-generated method stub
-
+		Task taskFound = findById(task.getId());
+		if(taskFound==null){
+			throw new EntityNotFoundException("Task not found with the Id provided.");
+		}			
+		taskDao.delete(taskFound);
 	}
 
 	@Override
