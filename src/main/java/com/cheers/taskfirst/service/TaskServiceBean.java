@@ -15,8 +15,7 @@ public class TaskServiceBean implements TaskService {
 
 	@Autowired
 	TaskDao taskDao;
-	
-	
+
 	@Override
 	public List<Task> findByCreatedBy(String createdBy) {
 		// TODO Auto-generated method stub
@@ -26,7 +25,7 @@ public class TaskServiceBean implements TaskService {
 	@Override
 	public Task findById(Long id) {
 		Task taskFound = null;
-		if(id==null || id <= 0){
+		if (id == null || id <= 0) {
 			throw new IllegalArgumentException("Invalid value for Task ID, ID must be positive number");
 		}
 		taskFound = taskDao.findOne(id);
@@ -41,7 +40,7 @@ public class TaskServiceBean implements TaskService {
 
 	@Override
 	public Task addTask(Task task) {
-		if(task==null || task.getSubject() == null || task.getSubject().isEmpty()){
+		if (task == null || task.getSubject() == null || task.getSubject().isEmpty()) {
 			throw new IllegalArgumentException("Task subject must be provided");
 		}
 		Task taskCreated = taskDao.save(task);
@@ -51,9 +50,9 @@ public class TaskServiceBean implements TaskService {
 	@Override
 	public Task updateTask(Task task) {
 		Task taskFound = findById(task.getId());
-		if(taskFound==null){
+		if (taskFound == null) {
 			throw new EntityNotFoundException("Task not found with the Id provided.");
-		}			
+		}
 		Task taskUpdated = taskDao.save(task);
 		return taskUpdated;
 	}
@@ -61,9 +60,9 @@ public class TaskServiceBean implements TaskService {
 	@Override
 	public void deleteTask(Task task) {
 		Task taskFound = findById(task.getId());
-		if(taskFound==null){
+		if (taskFound == null) {
 			throw new EntityNotFoundException("Task not found with the Id provided.");
-		}			
+		}
 		taskDao.delete(taskFound);
 	}
 
@@ -72,5 +71,7 @@ public class TaskServiceBean implements TaskService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 }

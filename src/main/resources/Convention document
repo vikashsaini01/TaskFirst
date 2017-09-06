@@ -1,0 +1,22 @@
+##Standard for naming in spring, for this project.
+# To keep everything in uniform naming 
+
+
+1. All view names - All letters in small.
+
+e.g. -   "login", "loginsuccess", "home", "addtask" etc
+
+1.1 All view files html, jsp, js should also follow the above rule. i.e. every letter in small
+
+e.g  - login.html, loginsuccess.html, home.html, addtask.jsp
+
+
+
+2. All models passed to views should follow the variable naming convention. 
+i.e. All instance, class, and class constants are in mixed case with a 
+lowercase first letter. Internal words start with capital letters. 
+
+so model names would be like. e.g.
+
+model.addObject("loginUser", new LoginUser());
+model.addObject("userDetails", userDetails);

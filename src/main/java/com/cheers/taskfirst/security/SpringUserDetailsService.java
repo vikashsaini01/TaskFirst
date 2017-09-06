@@ -1,4 +1,4 @@
-package com.cheers.taskfirst.setup;
+package com.cheers.taskfirst.security;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -11,29 +11,29 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.cheers.taskfirst.model.TaskFirstUserDetails;
-import com.cheers.taskfirst.service.TaskFirstUserDetailsService;
+import com.cheers.taskfirst.model.LoginUser;
+import com.cheers.taskfirst.service.LoginUserService;
 
 @Service
 public class SpringUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	TaskFirstUserDetailsService taskFirstUserDetailsService;
+	LoginUserService taskFirstUserDetailsService;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		TaskFirstUserDetails taskFirstUserDetails = taskFirstUserDetailsService.findByUsername(username);
+		LoginUser loginUser = taskFirstUserDetailsService.findByUsername(username);
 
-		if (taskFirstUserDetails == null) {
+		if (loginUser == null) {
 			return null;
 		}
 
 		Collection<GrantedAuthority> authorities = new HashSet<>();
 		
-		authorities.addAll(taskFirstUserDetails.getAuthorities());
+		authorities.addAll(loginUser.getAuthorities());
 		
-		User userDetails = new User(taskFirstUserDetails.getUsername(), taskFirstUserDetails.getPassword(), taskFirstUserDetails.isEnabled(),
-				taskFirstUserDetails.isAccountNonExpired(), taskFirstUserDetails.isCredentialsNonExpired(), taskFirstUserDetails.isAccountNonLocked(),
+		User userDetails = new User(loginUser.getUsername(), loginUser.getPassword(), loginUser.isEnabled(),
+				loginUser.isAccountNonExpired(), loginUser.isCredentialsNonExpired(), loginUser.isAccountNonLocked(),
 				authorities);
 		
 		return userDetails;

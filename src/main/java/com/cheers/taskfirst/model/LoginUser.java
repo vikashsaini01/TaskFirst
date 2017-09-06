@@ -1,5 +1,6 @@
 package com.cheers.taskfirst.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,7 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class TaskFirstUserDetails extends AbstractModelParent {
+public class LoginUser extends AbstractModelParent {
 
 	private static final long serialVersionUID = 1L;
 
@@ -26,7 +27,7 @@ public class TaskFirstUserDetails extends AbstractModelParent {
 	joinColumns = @JoinColumn(name = "TaskFirstUserDetailsId", referencedColumnName = "id"),
 	inverseJoinColumns= @JoinColumn(name = "TaskFirstAuthorityId", referencedColumnName = "id")
 	)
-	private Set<TaskFirstGrantedAuthority> authorities;
+	private Set<UserRole> authorities;
 
 	private boolean accountNonExpired = true;
 	private boolean accountNonLocked = true;
@@ -49,11 +50,11 @@ public class TaskFirstUserDetails extends AbstractModelParent {
 		this.username = username;
 	}
 
-	public Set<TaskFirstGrantedAuthority> getAuthorities() {
+	public Set<UserRole> getAuthorities() {
 		return authorities;
 	}
 
-	public void setAuthorities(Set<TaskFirstGrantedAuthority> authorities) {
+	public void setAuthorities(Set<UserRole> authorities) {
 		this.authorities = authorities;
 	}
 
@@ -87,6 +88,10 @@ public class TaskFirstUserDetails extends AbstractModelParent {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+	
+	public List<Task> getTasks(){
+		return null;
 	}
 
 }

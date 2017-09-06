@@ -1,4 +1,4 @@
-package com.cheers.taskfirst.setup;
+package com.cheers.taskfirst.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -9,14 +9,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
-	
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
-	protected void configure(HttpSecurity http) throws Exception{
+	protected void configure(HttpSecurity http) throws Exception {
+
+		// @formatter:off
 		 http
          .authorizeRequests()
              .antMatchers("/", "/home").permitAll()
+             .antMatchers("/", "/tasks").permitAll()
              .anyRequest().authenticated()
              .and()
          .formLogin()
@@ -25,13 +27,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
              .and()
          .logout()
              .permitAll();
+		 
+		// @formatter:on
 	}
-	
-/*	@Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-            .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER");
-    }
-*/
+
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
+	}
+
 }

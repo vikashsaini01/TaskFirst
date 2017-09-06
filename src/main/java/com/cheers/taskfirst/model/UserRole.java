@@ -7,14 +7,14 @@ import javax.validation.constraints.NotNull;
 import org.springframework.security.core.GrantedAuthority;
 
 @Entity
-public class TaskFirstGrantedAuthority  extends AbstractModelParent implements GrantedAuthority {
+public class UserRole  extends AbstractModelParent implements GrantedAuthority {
 
 	@NotNull
 	private String  authority;
 	
 	private static final long serialVersionUID = 1L;
 
-	public TaskFirstGrantedAuthority(String authority){
+	public UserRole(String authority){
 		this.authority = authority ; 
 	}
 	
