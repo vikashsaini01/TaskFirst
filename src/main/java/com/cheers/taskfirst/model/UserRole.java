@@ -1,7 +1,6 @@
 package com.cheers.taskfirst.model;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.security.core.GrantedAuthority;

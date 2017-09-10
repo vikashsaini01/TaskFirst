@@ -17,12 +17,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// @formatter:off
 		 http
          .authorizeRequests()
-             .antMatchers("/", "/home").permitAll()
-             .antMatchers("/", "/tasks").permitAll()
+             .antMatchers("/", "/home","/login","/adduser").permitAll()
              .anyRequest().authenticated()
              .and()
          .formLogin()
              .loginPage("/login")
+             .defaultSuccessUrl("/tasks")
              .permitAll()
              .and()
          .logout()
@@ -33,7 +33,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
+	
 	}
-
 }

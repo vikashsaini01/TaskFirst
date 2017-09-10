@@ -1,9 +1,10 @@
 package com.cheers.taskfirst.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
 /**
  * Main class to hold task details 
  * @author hp1
@@ -18,16 +19,19 @@ public class Task extends AbstractModelParent implements Serializable{
 		PENDING, STARTED, INPROGRESS, COMPLETED, REJECTED
 	};
 	
+	@NotNull
 	private String subject;
 	
 	private String details;
 	
+	@NotNull
 	private TaskStatus status;
 	
-	private LocalDateTime targetDate;
+	private Date targetDate;
 	
-	private LocalDateTime actualEndDate;
+	private Date actualEndDate;
 	
+	@NotNull
 	private boolean showReminder;
 
 	public String getSubject() {
@@ -54,19 +58,19 @@ public class Task extends AbstractModelParent implements Serializable{
 		this.status = status;
 	}
 
-	public LocalDateTime getTargetDate() {
+	public Date getTargetDate() {
 		return targetDate;
 	}
 
-	public void setTargetDate(LocalDateTime targetDate) {
+	public void setTargetDate(Date targetDate) {
 		this.targetDate = targetDate;
 	}
 
-	public LocalDateTime getActualEndDate() {
+	public Date getActualEndDate() {
 		return actualEndDate;
 	}
 
-	public void setActualEndDate(LocalDateTime actualEndDate) {
+	public void setActualEndDate(Date actualEndDate) {
 		this.actualEndDate = actualEndDate;
 	}
 

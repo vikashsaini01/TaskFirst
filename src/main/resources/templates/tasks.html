@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Tasks</title>
+</head>
+<body>
+	<a href="@{/logout}">Sign Out</a>
+
+
+	<form th:action="@{/addtask}" th:object="${task}" method="post">
+		<table border="1">
+			<tr>
+				<td>Subject</td>
+				<td>Details</td>
+				<td>Target Date</td>
+				<td>Show Reminder</td>
+			</tr>
+			<tr th:unless="#lists.isEmpty(tasks)" th:each="taskRef : ${tasks}">
+				<td th:text="${taskRef.subject}">Task Subject</td>
+				<td th:text="${taskRef.details}">Task Details</td>
+				<td th:text="${taskRef.targetDate}">Task Target Date</td>
+				<td th:text="${taskRef.showReminder}? 'Yes' : 'No'">Yes</td>
+			</tr>
+			<tr>
+				<td><input type="text" th:field="*{subject}" /></td>
+				<td><input type="text" th:field="*{details}" /></td>
+				<td><input type="text" th:field="*{targetDate}" /></td>
+				<td><input type="checkbox" th:field="*{showReminder}" /></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><input type="submit" value="Add" /></td>
+			</tr>
+		</table>
+	</form>
+
+</body>
+</html>

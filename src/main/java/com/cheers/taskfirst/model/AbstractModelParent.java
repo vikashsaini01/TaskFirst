@@ -2,12 +2,15 @@ package com.cheers.taskfirst.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Version;
-import javax.validation.constraints.NotNull;
 
 /**
  * Mapped super class that defines common fields for entities
@@ -26,11 +29,13 @@ public abstract class AbstractModelParent implements Serializable{
 	@GeneratedValue
 	protected Long id;
 	
-	@NotNull
-	protected LocalDateTime createdOn;
+	
+	protected Date createdOn;
+	
+
 	
 	
-	protected LocalDateTime updatadOn;
+	protected Date updatadOn;
 	
 	
 	protected String createdBy;
@@ -53,22 +58,22 @@ public abstract class AbstractModelParent implements Serializable{
 	}
 
 
-	public LocalDateTime getCreatedOn() {
+	public Date getCreatedOn() {
 		return createdOn;
 	}
 
 
-	public void setCreatedOn(LocalDateTime createdOn) {
+	public void setCreatedOn(Date createdOn) {
 		this.createdOn = createdOn;
 	}
 
 
-	public LocalDateTime getUpdatadOn() {
+	public Date getUpdatadOn() {
 		return updatadOn;
 	}
 
 
-	public void setUpdatadOn(LocalDateTime updatadOn) {
+	public void setUpdatadOn(Date updatadOn) {
 		this.updatadOn = updatadOn;
 	}
 
@@ -102,8 +107,16 @@ public abstract class AbstractModelParent implements Serializable{
 		this.version = version;
 	}
 
+
+	@PrePersist
+	protected void beforePersist(){
+		setCreatedOn(Calendar.getInstance().getTime());
+	}
 	
-	
+	@PreUpdate
+	protected void beforeUpdate(){
+		setUpdatadOn(Calendar.getInstance().getTime());
+	}
 	
 	
 }

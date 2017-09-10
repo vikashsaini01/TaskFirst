@@ -1,11 +1,49 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-    <head>
-        <title>Spring Security Example</title>
-    </head>
-    <body>
-        <h1>Welcome!</h1>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Spring Security Example</title>
+</head>
+<body>
+	<h2>Welcome!</h2>
 
-        <p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
-    </body>
+	<form th:action="@{/adduser}" th:object="${loginUser}" method="post">
+		<table>
+			<tr>
+				<td><label> New user </label></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><label th:for="username" th:text="#{username}"> User Name / Email : </label></td>
+				<td><input type="text" th:field="*{username}" /></td>
+				<td th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></td>
+			</tr>
+			<tr>
+				<td><label th:for="password" th:text="#{password}"> Password: </label></td>
+				<td><input type="password" th:field="*{password}" /></td>
+				<td th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></td>
+			</tr>
+			<tr>
+				<td><label th:for="confirmpassword" th:text="#{confirmpassword}">Confirm Password:</label></td>
+				<td><input type="password" th:field="*{confirmpassword}" /></td>
+				<td th:if="${#fields.hasErrors('confirmpassword')}" th:errors="*{confirmpassword}"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td th:if="${#fields.hasErrors('global')}" th:errors="*{global}"></td>
+				<td></td>				
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" value="Create" /></td>
+			</tr>
+		</table>
+	</form>
+
+
+	<p>
+		Existing users click <a th:href="@{/login}">here</a> to Login.
+	</p>
+</body>
 </html>

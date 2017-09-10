@@ -1,0 +1,36 @@
+/* 
+This file provides the information on controller view names and request mapping urls.
+Their naming convention is also discussed.
+
+
+*/
+
+1. Home Page 
+file name : home.html
+Secured : No , all users can access
+Functionality : SignUp Form & Login Link
+Form provided :
+
+1.1 Sign Up -
+Submit URL : /adduser	
+	1.1.1 URL (/adduser):
+	Secured : No, All users can access ( try to create user)
+On Success sign Up : Login page should come with username entered already
+	url : /login
+On Failure sign up : Home page should come with Error details for field
+	url : /home
+	
+
+2 Login Link: 
+URL : /login ( with method Get) 
+file name : login.html 
+Secured : No, All users can access
+Functionality : Login to Application page
+Submit URL :  /login  ( with method post) 
+On success : Return tasks page returning all tasks for logged in user,
+			Add Logged in user to session.
+	On Success url : /tasks
+On Failure : Returns back the login page with errors
+	On failure url : /login
+				
+	
