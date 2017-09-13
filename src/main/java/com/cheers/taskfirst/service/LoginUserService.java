@@ -6,4 +6,6 @@ public interface LoginUserService {
 	public LoginUser findByUsername(String username);
 	
 	public LoginUser addLoginUser(LoginUser loginUser)throws IllegalArgumentException;
+	
+	public boolean enableLoginUser(String username)throws IllegalArgumentException;
 }

@@ -31,5 +31,17 @@ public class LoginUserBean implements LoginUserService {
 		}
 		return false;
 	}
+	
+	public boolean enableLoginUser(final String username)throws IllegalArgumentException{
+		LoginUser loginUserPresent = findByUsername(username); 
+		loginUserPresent.setEnabled(true);
+		LoginUser loginUserUpdated = loginUserDao.save(loginUserPresent);
+		if(loginUserUpdated.isEnabled()==true)
+			return true;
+		else
+		{	
+			throw new IllegalArgumentException("User couldn't be updated " );
+		}
+	}
 
 }

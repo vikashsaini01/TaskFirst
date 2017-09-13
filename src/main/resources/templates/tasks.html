@@ -5,32 +5,40 @@
 <title>Tasks</title>
 </head>
 <body>
-	<a href="@{/logout}">Sign Out</a>
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Sign Out" />
+	</form>
 
 
-	<form th:action="@{/addtask}" th:object="${task}" method="post">
-		<table border="1">
+	<form th:action="@{/addtask}" th:object="${taskDTO}" method="post">
+		<table border="1" width="90%">
 			<tr>
 				<td>Subject</td>
 				<td>Details</td>
-				<td>Target Date</td>
+				<td>Status</td>
 				<td>Show Reminder</td>
 			</tr>
-			<tr th:unless="#lists.isEmpty(tasks)" th:each="taskRef : ${tasks}">
+			<tr th:unless="${#lists.isEmpty(listTaskDTO)}" th:each="taskRef : ${listTaskDTO}">
 				<td th:text="${taskRef.subject}">Task Subject</td>
 				<td th:text="${taskRef.details}">Task Details</td>
-				<td th:text="${taskRef.targetDate}">Task Target Date</td>
+				<td th:text="${taskRef.taskStatus}">Task Status</td>
 				<td th:text="${taskRef.showReminder}? 'Yes' : 'No'">Yes</td>
 			</tr>
 			<tr>
 				<td><input type="text" th:field="*{subject}" /></td>
 				<td><input type="text" th:field="*{details}" /></td>
-				<td><input type="text" th:field="*{targetDate}" /></td>
+				<td><input type="text" th:field="*{taskStatus}" /></td>
 				<td><input type="checkbox" th:field="*{showReminder}" /></td>
 			</tr>
+			<tr
+				th:if="${#fields.hasErrors('subject')} or ${#fields.hasErrors('details')} or ${#fields.hasErrors('taskStatus')} or ${#fields.hasErrors('showReminder')}">
+				<td><span th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}"></span></td>
+				<td><span th:if="${#fields.hasErrors('details')}" th:errors="*{details}"></span></td>
+				<td><span th:if="${#fields.hasErrors('taskStatus')}" th:errors="*{taskStatus}"></span></td>
+				<td><span th:if="${#fields.hasErrors('showReminder')}" th:errors="*{showReminder}"></span></td>
+			</tr>
 			<tr>
-				<td></td>
-				<td></td>
+				<td colspan="2"><span th:if="${#fields.hasErrors('global')}" th:errors="*{global}"></span></td>
 				<td></td>
 				<td><input type="submit" value="Add" /></td>
 			</tr>

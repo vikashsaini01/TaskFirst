@@ -6,7 +6,7 @@ import com.cheers.taskfirst.model.Task;
 
 public interface TaskService {
 
-	public List<Task> findByCreatedBy(String createdBy);
+	public List<Task> findByCreatedBy(Long createdBy);
 	
 	public Task findById(Long id);
 	

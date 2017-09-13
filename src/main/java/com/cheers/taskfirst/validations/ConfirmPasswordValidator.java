@@ -3,7 +3,7 @@ package com.cheers.taskfirst.validations;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import com.cheers.taskfirst.model.LoginUser;
+import com.cheers.taskfirst.dto.LoginUserDTO;
 
 public class ConfirmPasswordValidator implements ConstraintValidator<ValidConfirmPassword, Object>{
 
@@ -14,8 +14,8 @@ public class ConfirmPasswordValidator implements ConstraintValidator<ValidConfir
 	
 	@Override
 	public boolean isValid(Object candidate, ConstraintValidatorContext context) {
-		if(candidate instanceof LoginUser){
-			LoginUser loginUser = (LoginUser)candidate;
+		if(candidate instanceof LoginUserDTO){
+			LoginUserDTO loginUser = (LoginUserDTO)candidate;
 			if(loginUser.getPassword()==null && loginUser.getConfirmpassword()==null)
 				return true;
 			else if(loginUser.getPassword()==null )

@@ -1,7 +1,6 @@
 package com.cheers.taskfirst.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -38,10 +37,10 @@ public abstract class AbstractModelParent implements Serializable{
 	protected Date updatadOn;
 	
 	
-	protected String createdBy;
+	protected Long createdBy;
 	
 	
-	protected String updatedBy;
+	protected Long updatedBy;
 	
 	
 	@Version
@@ -78,22 +77,22 @@ public abstract class AbstractModelParent implements Serializable{
 	}
 
 
-	public String getCreatedBy() {
+	public Long getCreatedBy() {
 		return createdBy;
 	}
 
 
-	public void setCreatedBy(String createdBy) {
+	public void setCreatedBy(Long createdBy) {
 		this.createdBy = createdBy;
 	}
 
 
-	public String getUpdatedBy() {
+	public Long getUpdatedBy() {
 		return updatedBy;
 	}
 
 
-	public void setUpdatedBy(String updatedBy) {
+	public void setUpdatedBy(Long updatedBy) {
 		this.updatedBy = updatedBy;
 	}
 	

@@ -17,9 +17,8 @@ public class TaskServiceBean implements TaskService {
 	TaskDao taskDao;
 
 	@Override
-	public List<Task> findByCreatedBy(String createdBy) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Task> findByCreatedBy(Long createdBy) {
+		return taskDao.findByCreatedBy(createdBy);
 	}
 
 	@Override

@@ -1,19 +1,18 @@
-package com.cheers.taskfirst.model;
+package com.cheers.taskfirst.dto;
 
-import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 /**
  * Main class to hold task details 
  * @author hp1
  *
  */
-@Entity
-public class Task extends AbstractModelParent implements Serializable{
+
+public class TaskDTO {
 	
-	private static final long serialVersionUID = 1L;
+
 
 	enum TaskStatus{
 		PENDING("PENDING"), STARTED("STARTED"), INPROGRESS("INPROGRESS"), COMPLETED("COMPLETED"), REJECTED("REJECTED") ; 
@@ -28,8 +27,10 @@ public class Task extends AbstractModelParent implements Serializable{
 	};
 	
 	@NotNull
+	@Size(min=4, max=140)
 	private String subject;
 	
+	@Size(max=400)
 	private String details;
 	
 	@NotNull
@@ -40,7 +41,7 @@ public class Task extends AbstractModelParent implements Serializable{
 	private Date actualEndDate;
 	
 	@NotNull
-	private Boolean showReminder;
+	private boolean showReminder;
 
 	public String getSubject() {
 		return subject;
@@ -82,11 +83,11 @@ public class Task extends AbstractModelParent implements Serializable{
 		this.actualEndDate = actualEndDate;
 	}
 
-	public Boolean isShowReminder() {
+	public boolean isShowReminder() {
 		return showReminder;
 	}
 
-	public void setShowReminder(Boolean showReminder) {
+	public void setShowReminder(boolean showReminder) {
 		this.showReminder = showReminder;
 	}
 	

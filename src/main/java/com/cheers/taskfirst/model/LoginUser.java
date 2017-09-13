@@ -1,6 +1,5 @@
 package com.cheers.taskfirst.model;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,31 +10,24 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
-
-import com.cheers.taskfirst.validations.ValidConfirmPassword;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-@ValidConfirmPassword
-public class LoginUser extends AbstractModelParent {
+
+public class LoginUser extends AbstractModelParent implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 
 	@NotNull
-	@Size(min = 6, max = 25)
-	@Pattern(regexp = "^[A-Za-z0-9_@!]+$", message = "Only alphanumeric (A-Z, a-z, 0-9 and _,@,!) are allowed")
 	private String password;
 
-	@NotNull
 	@Transient
 	private String confirmpassword;
 
-	@NotNull
+
 	@Email
-	@Size(min = 4, max = 30)
 	private String username;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -45,13 +37,14 @@ public class LoginUser extends AbstractModelParent {
 	private boolean accountNonExpired = true;
 	private boolean accountNonLocked = true;
 	private boolean credentialsNonExpired = true;
-	private boolean enabled = true;
+	private boolean enabled = false;
 
 	public LoginUser() {
 	}
 
-	public LoginUser(String username) {
+	public LoginUser(String username, String password) {
 		this.username = username;
+		this.password= password;
 	}
 
 	/**
@@ -119,10 +112,6 @@ public class LoginUser extends AbstractModelParent {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
-	}
-
-	public List<Task> getTasks() {
-		return null;
 	}
 
 	public String getConfirmpassword() {
