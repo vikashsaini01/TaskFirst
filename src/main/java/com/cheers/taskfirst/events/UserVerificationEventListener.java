@@ -10,11 +10,12 @@ import org.springframework.stereotype.Component;
 
 import com.cheers.taskfirst.model.LoginUser;
 import com.cheers.taskfirst.model.VerificationToken;
+import com.cheers.taskfirst.model.VerificationToken.VerifyFor;
 import com.cheers.taskfirst.service.LoginUserService;
 import com.cheers.taskfirst.service.VerificationTokenService;
 
 @Component
-public class UserCreatedEventListener implements ApplicationListener<OnUserCreatedEvent> {
+public class UserVerificationEventListener implements ApplicationListener<OnUserVerificationRequiredEvent> {
 
 	@Autowired
 	LoginUserService loginUserService;
@@ -26,11 +27,12 @@ public class UserCreatedEventListener implements ApplicationListener<OnUserCreat
 	JavaMailSender mailSender;
 	
 	@Override
-	public void onApplicationEvent(OnUserCreatedEvent onUserCreatedevent) {
+	public void onApplicationEvent(OnUserVerificationRequiredEvent onUserCreatedevent) {
 		LoginUser loginUser = onUserCreatedevent.getLoginUser();
 		String tokenValue = UUID.randomUUID().toString();
+		VerifyFor verifyFor = onUserCreatedevent.getVerifyFor();
 		String verificationUrl = "http://localhost:8080"+onUserCreatedevent.getApplicationUrl() + "/verifyemail?token=" + tokenValue;
-		VerificationToken verificationToken = new VerificationToken(tokenValue, loginUser);
+		VerificationToken verificationToken = new VerificationToken(tokenValue, loginUser, verifyFor);
 		//VerificationToken verificationTokenAdded =
 				verificationTokenService.addVerificationToken(verificationToken);
 		
@@ -42,7 +44,7 @@ public class UserCreatedEventListener implements ApplicationListener<OnUserCreat
 		emailMessage.setSubject(subject);
 		emailMessage.setText(verificationUrl);
 		
-		mailSender.send(emailMessage);
+		//mailSender.send(emailMessage);
 
 	}
 

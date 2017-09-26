@@ -83,13 +83,14 @@ public class TaskDTO {
 		this.actualEndDate = actualEndDate;
 	}
 
-	public boolean isShowReminder() {
+	public boolean getShowReminder() {
 		return showReminder;
 	}
 
 	public void setShowReminder(boolean showReminder) {
 		this.showReminder = showReminder;
 	}
+
 	
 	/** To be added later, feature either to have parent task and a list of child tasks
 	 * or a parentTaskList which is another class holding child tasks and/or other task lists 

@@ -20,6 +20,7 @@ public class SpringUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		LoginUser loginUser = taskFirstUserDetailsService.findByUsername(username);
+		loginUser.getAuthorities();
 		return loginUser;
 
 /*		if (loginUser == null) {

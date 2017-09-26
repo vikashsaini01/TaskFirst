@@ -1,0 +1,9 @@
+insert into user_role values 
+(1, null, sysdate(), null, null, 1, 'APP_USER') ; 
+
+
+insert into user_role values 
+(2, null, sysdate(), null, null, 1, 'ADMIN') ; 
+
+insert into user_role values 
+(3, null, sysdate(), null, null, 1, 'APP_TENURED_USER') ; 

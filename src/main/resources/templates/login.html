@@ -11,9 +11,12 @@
 		<div th:if="${param.logout}">You have been logged out.</div>
 		<div th:if="${mail_verifyEmail}" th:text="${mail_verifyEmail}"></div>
 		<div th:text="${home_userCreatedMessage}? #{${home_userCreatedMessage}} : 'Login here'">Login here</div>
+
+		<div th:if="${messageToUser}" th:text="${messageToUser}"></div>
+
 	</div>
 
-	<form th:action="@{/login}" method="post">
+	<form th:action="@{/perform_login}" method="post">
 		<table>
 			<tr>
 				<td><label th:for="username" th:text="#{username}"> User Name / Email : </label></td>
@@ -26,10 +29,18 @@
 
 			</tr>
 			<tr>
+				<td><label th:for="Remember-me"> Remember me: </label></td>
+				<td><input type="checkbox" id="remember-me" name="remember-me" /></td>
+			</tr>
+			<tr>
 				<td></td>
 				<td><input type="submit" value="Login" /></td>
 			</tr>
 		</table>
 	</form>
+	
+	<p>
+		Forgot Password ???  Click <a th:href="@{/baduser}">here</a> to reset.
+	</p>
 </body>
 </html>

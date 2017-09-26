@@ -1,5 +1,6 @@
 package com.cheers.taskfirst.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -80,6 +81,22 @@ public class LoginUser extends AbstractModelParent implements UserDetails {
 
 	public void setAuthorities(Set<UserRole> authorities) {
 		this.authorities = authorities;
+	}
+	
+	
+	/**
+	 * 
+	 * @param userRole
+	 * @return
+	 */
+	public boolean addAuthority(UserRole userRole){   
+		// Should this be synchronized ??? Is it thread safe as multiple thread might access it (for same instance ?? Yes ?? No ?? )
+		
+		if(this.getAuthorities()==null) // This is added as by default hibernate returns null if no role 
+		{
+			this.setAuthorities(new HashSet<UserRole>());
+		}
+		return this.getAuthorities().add(userRole);
 	}
 
 	public boolean isAccountNonExpired() {

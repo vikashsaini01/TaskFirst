@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.cheers.taskfirst.utils.TaskFirstConstants;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -46,10 +48,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// @formatter:off
 		 http
          .authorizeRequests()
-             .antMatchers("/", "/home","/login","/adduser","/verifyemail").permitAll()
+             .antMatchers("/", "/home","/login","/adduser","/verifyemail", 
+            		 "/baduser", "/resetmypassword","/resetpasswordlink").permitAll()
+             .antMatchers("/tasks").hasAnyAuthority("APP_USER","APP_TENURED_USER","ADMIN")
+             //Wasn't working as I was using hasRole ;)
+             .antMatchers("/resetpasswordpage","/resetpassword").hasAuthority(TaskFirstConstants.RESET_PASSWORD_ACCESS)
+             .antMatchers("/resetpasswordpage","/resetpassword").hasRole("")
              .anyRequest().authenticated()
+             .and().rememberMe().key("uniqueAndSecret")
              .and()
          .formLogin()
+         	 .loginProcessingUrl("/perform_login")
              .loginPage("/login")
              .defaultSuccessUrl("/tasks")
              .permitAll()

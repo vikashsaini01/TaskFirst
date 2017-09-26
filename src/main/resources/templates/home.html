@@ -7,6 +7,9 @@
 <body>
 	<h2>Welcome!</h2>
 
+	<div>
+		<div th:if="${messageToUser}" th:text="${messageToUser}"></div>
+	</div>
 	<form th:action="@{/adduser}" th:object="${loginUserDTO}" method="post">
 		<table>
 			<tr>
@@ -32,7 +35,7 @@
 			<tr>
 				<td></td>
 				<td th:if="${#fields.hasErrors('global')}" th:errors="*{global}"></td>
-				<td></td>				
+				<td></td>
 			</tr>
 			<tr>
 				<td></td>

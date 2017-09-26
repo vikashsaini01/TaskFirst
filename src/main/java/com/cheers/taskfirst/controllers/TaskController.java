@@ -34,7 +34,8 @@ public class TaskController {
 	public ModelAndView getTasksForUser(ModelAndView modelAndView) {
 		// Get the list of tasks for the logged in user and return it
 		List<Task> listTask = taskService.findByCreatedBy(getLoginUser().getId());
-		modelAndView.addObject("listTaskDTO", DozerHelper.mapList(dozerBeanMapper, listTask, TaskDTO.class));
+		List<TaskDTO> listTaskDTO = DozerHelper.mapList(dozerBeanMapper, listTask, TaskDTO.class);
+		modelAndView.addObject("listTaskDTO", listTaskDTO);
 
 		modelAndView.addObject("taskDTO", new TaskDTO());
 

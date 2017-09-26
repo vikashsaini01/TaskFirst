@@ -13,6 +13,9 @@ public class UserRole  extends AbstractModelParent implements GrantedAuthority {
 	
 	private static final long serialVersionUID = 1L;
 
+	public UserRole(){
+		
+	}
 	public UserRole(String authority){
 		this.authority = authority ; 
 	}

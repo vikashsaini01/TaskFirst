@@ -40,7 +40,15 @@ public class Task extends AbstractModelParent implements Serializable{
 	private Date actualEndDate;
 	
 	@NotNull
-	private Boolean showReminder;
+	private boolean showReminder;  /*boolean not Boolean .. as either it is yes or no (never null) */
+
+	public boolean isShowReminder() {
+		return showReminder;
+	}
+
+	public void setShowReminder(boolean showReminder) {
+		this.showReminder = showReminder;
+	}
 
 	public String getSubject() {
 		return subject;
@@ -82,13 +90,6 @@ public class Task extends AbstractModelParent implements Serializable{
 		this.actualEndDate = actualEndDate;
 	}
 
-	public Boolean isShowReminder() {
-		return showReminder;
-	}
-
-	public void setShowReminder(Boolean showReminder) {
-		this.showReminder = showReminder;
-	}
 	
 	/** To be added later, feature either to have parent task and a list of child tasks
 	 * or a parentTaskList which is another class holding child tasks and/or other task lists 
